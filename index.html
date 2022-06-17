@@ -9,12 +9,17 @@
 	<script type="text/javascript" src="QRCode.js"></script>
 </head>
 
-<body onload="dlgScan.show()">
+<body>
 	<ui5-barcode-scanner-dialog id="dlgScan"></ui5-barcode-scanner-dialog>
+	<ui5-button id="btnScan" icon="camera" tooltip="Start Camera">Scan</ui5-button>
+	<br />
 	<input name="bic" value="COLSDE33XXX"/>
 	<br />
 	<img is="ui5-qrcode" ecclevel="M" />
-	<script>
+	<script type="text/javascript">
+		btnScan.addEventListener("click", function(event) {
+			dlgScan.show();
+		});
 		dlgScan.addEventListener("scan-success", function (event) {
 			var giro = event.detail.text.split("\n");
 			giro[4] = document.querySelector("input").value;
